@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100d19">
+  <meta name="description" content="Heart Radio – für einen speziellen Menschen. Vielleicht bist du ja gemeint?">
+  <title>Heart Radio – for a special person</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #100d19;
+      --panel: rgba(255,255,255,.055);
+      --text: #fbf7ff;
+      --muted: #c5b9cf;
+      --pink: #ff5c9a;
+      --pink2: #ff9abf;
+      --line: rgba(255,255,255,.13);
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 78% 8%, rgba(165,48,111,.23), transparent 34rem),
+        radial-gradient(ellipse at 8% 48%, rgba(102,63,160,.17), transparent 32rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    a { color: inherit; }
+    .wrap { width: min(var(--max), calc(100% - 48px)); margin-inline: auto; }
+    header {
+      position: absolute; inset: 0 0 auto; z-index: 5;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav { height: 78px; display:flex; align-items:center; justify-content:space-between; }
+    .brand { display:flex; align-items:center; gap:11px; text-decoration:none; font-weight:800; letter-spacing:.11em; font-size:.9rem; }
+    .brand-mark { color:var(--pink); font-size:1.45rem; filter: drop-shadow(0 0 12px rgba(255,92,154,.55)); }
+    .nav a:not(.brand) { text-decoration:none; color:var(--muted); font-size:.9rem; transition:color .2s; }
+    .nav a:not(.brand):hover { color:white; }
+    .hero {
+      min-height: 760px; min-height: min(900px, 100svh);
+      display:grid; place-items:center; position:relative; overflow:hidden;
+      padding: 130px 0 90px; text-align:center;
+    }
+    .hero::before, .hero::after {
+      content:""; position:absolute; border:1px solid rgba(255,154,191,.12);
+      width: min(72vw, 760px); aspect-ratio:1; border-radius:50%; pointer-events:none;
+    }
+    .hero::before { transform:scale(.78); box-shadow:0 0 100px rgba(255,92,154,.07), inset 0 0 90px rgba(255,92,154,.04); }
+    .hero::after { transform:scale(1.08); border-style:dashed; opacity:.45; }
+    .hero-content { position:relative; z-index:1; max-width:850px; }
+    .eyebrow { color:var(--pink2); text-transform:uppercase; letter-spacing:.24em; font-size:.75rem; font-weight:700; }
+    h1 { font-size:clamp(3.1rem, 8vw, 6.8rem); line-height:1.02; letter-spacing:-.065em; margin:22px 0 22px; font-weight:800; }
+    h1 span { display:block; color:var(--pink2); }
+    .lead { color:var(--muted); font-size:clamp(1.05rem, 2vw, 1.28rem); margin:0 auto; max-width:600px; }
+    .actions { margin-top:38px; display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:52px; padding:0 23px; border-radius:999px; text-decoration:none; font-weight:700; transition:transform .2s, box-shadow .2s, background .2s; }
+    .btn:hover { transform:translateY(-2px); }
+    .btn-primary { color:#230e1b; background:linear-gradient(120deg,var(--pink2),var(--pink)); box-shadow:0 10px 35px rgba(255,92,154,.22); }
+    .btn-ghost { border:1px solid var(--line); color:var(--text); background:rgba(255,255,255,.035); }
+    .heart-orbit { width:74px; height:74px; margin:0 auto 25px; border-radius:50%; display:grid; place-items:center; border:1px solid rgba(255,154,191,.32); background:rgba(255,92,154,.08); color:var(--pink); font-size:2rem; box-shadow:0 0 55px rgba(255,92,154,.15); animation:pulse 3s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { transform:scale(1); box-shadow:0 0 35px rgba(255,92,154,.12); } 50% { transform:scale(1.07); box-shadow:0 0 65px rgba(255,92,154,.25); } }
+    .scroll { position:absolute; bottom:27px; left:50%; transform:translateX(-50%); color:#94889f; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; }
+    section { padding:112px 0; }
+    .section-kicker { color:var(--pink); font-size:.75rem; font-weight:800; letter-spacing:.2em; text-transform:uppercase; }
+    h2 { font-size:clamp(2.2rem, 5vw, 4rem); letter-spacing:-.055em; line-height:1.08; margin:13px 0 24px; }
+    .about-grid { display:grid; grid-template-columns:1.05fr .95fr; gap:70px; align-items:center; }
+    .copy { color:var(--muted); font-size:1.08rem; max-width:600px; }
+    .copy p { margin:0 0 17px; }
+    .story-card {
+      min-height:330px; padding:38px; border:1px solid var(--line); border-radius:28px;
+      background:linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.025));
+      display:flex; flex-direction:column; justify-content:space-between; position:relative; overflow:hidden;
+    }
+    .story-card::after { content:"♡"; position:absolute; right:14px; bottom:-85px; font-size:19rem; line-height:1; color:rgba(255,92,154,.07); }
+    .year { color:var(--pink2); font-size:clamp(3rem,7vw,5.2rem); font-weight:800; letter-spacing:-.08em; line-height:1; }
+    .story-card p { position:relative; z-index:1; max-width:300px; color:var(--muted); margin:22px 0 0; }
+    .soon { display:inline-flex; align-items:center; gap:9px; color:var(--pink2); font-size:.78rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; }
+    .soon::before { content:""; width:23px; height:1px; background:currentColor; }
+    .question { text-align:center; padding:120px 0; position:relative; overflow:hidden; }
+    .question-inner { max-width:760px; margin:auto; }
+    .question h2 { margin-inline:auto; }
+    .question p { color:var(--muted); font-size:1.1rem; max-width:560px; margin:0 auto; }
+    .question .actions { margin-top:32px; }
+    .contact-band { border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:34px 0; }
+    .contact-row { display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; }
+    .contact-row p { margin:4px 0 0; color:var(--muted); font-size:.9rem; }
+    .email { color:var(--pink2); font-weight:700; text-decoration:none; border-bottom:1px solid rgba(255,154,191,.4); padding-bottom:3px; }
+    footer { padding:32px 0 40px; color:#8f8498; font-size:.82rem; }
+    .footer-row { display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap; }
+    .footer-heart { color:var(--pink); }
+    @media (max-width:760px) {
+      .wrap { width:min(100% - 36px, var(--max)); }
+      .nav { height:68px; }
+      .hero { min-height:760px; min-height:92svh; }
+      section { padding:82px 0; }
+      .about-grid { grid-template-columns:1fr; gap:35px; }
+      .story-card { min-height:260px; }
+      .question { padding:90px 0; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      *,*::before,*::after { scroll-behavior:auto !important; animation:none !important; transition:none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav wrap" aria-label="Hauptnavigation">
+      <a class="brand" href="#home" aria-label="Heart Radio Startseite"><span class="brand-mark">♥</span> HEART RADIO</a>
+      <a href="#about">Über uns</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content wrap">
+        <div class="heart-orbit" aria-hidden="true">♥</div>
+        <div class="eyebrow">Heart Radio · for a special person</div>
+        <h1>Für einen <span>speziellen Menschen</span></h1>
+        <p class="lead">Schön, dass du da bist – vielleicht bist du ja gemeint?</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="mailto:mystery@heart-radio.tv">Kontakt aufnehmen <span aria-hidden="true">↗</span></a>
+          <a class="btn btn-ghost" href="#about">Mehr erfahren</a>
+        </div>
+      </div>
+      <div class="scroll" aria-hidden="true">Scroll to discover ↓</div>
+    </section>
+
+    <section id="about">
+      <div class="about-grid wrap">
+        <div>
+          <div class="section-kicker">Die Geschichte dahinter</div>
+          <h2>Über uns</h2>
+          <div class="copy">
+            <p>Entstanden aus einem Gedanken im Jahr 2022 wurde das Projekt 2024 in die Realität umgesetzt.</p>
+            <p>Das Ziel dieser Seite ist es, einem speziellen Menschen irgendwann zu zeigen, wie wichtig er ist.</p>
+          </div>
+          <p class="soon">More coming soon</p>
+        </div>
+        <aside class="story-card" aria-label="Die Geschichte von Heart Radio">
+          <div class="year">2022<span style="color:var(--pink);">.</span></div>
+          <p>Ein Gedanke. Eine besondere Geschichte. Und die Hoffnung, dass die richtige Person diese Zeilen irgendwann findet.</p>
+          <div class="soon">Heart Radio · 2024</div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="question">
+      <div class="question-inner wrap">
+        <div class="heart-orbit" aria-hidden="true">♡</div>
+        <div class="section-kicker">Eine kleine Frage</div>
+        <h2>Was meinst du?<br><span style="color:var(--pink2);">Bist du „the one“?</span></h2>
+        <p>Bereit, uns zu kontaktieren? Dann melde dich, wenn du dich angesprochen fühlst.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="mailto:mystery@heart-radio.tv">Contact us <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <div class="contact-band">
+      <div class="contact-row wrap">
+        <div>
+          <strong>Manchmal ist eine Nachricht der Anfang.</strong>
+          <p>Wir freuen uns, von dir zu hören.</p>
+        </div>
+        <a class="email" href="mailto:mystery@heart-radio.tv">mystery@heart-radio.tv</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-row wrap">
+      <span>© <span id="year"></span> Heart Radio. All rights reserved.</span>
+      <span>Created with <span class="footer-heart">♥</span> for a special person.</span>
+    </div>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
